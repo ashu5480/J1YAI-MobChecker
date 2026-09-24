@@ -130,7 +130,7 @@ function initNav() {
 }
 
 function initAnchors() {
-  const navH = 74;
+  const nav = $('#navbar');
   $$('a[href^="#"]').forEach((a) => {
     a.addEventListener('click', (e) => {
       const id = a.getAttribute('href');
@@ -138,6 +138,7 @@ function initAnchors() {
       const target = $(id);
       if (!target) return;
       e.preventDefault();
+      const navH = nav ? nav.getBoundingClientRect().height : 74;
       const y = target.getBoundingClientRect().top + window.scrollY - navH + 2;
       window.scrollTo({ top: y, behavior: prefersReduced ? 'auto' : 'smooth' });
     });
@@ -147,6 +148,10 @@ function initAnchors() {
 function initReveal() {
   const els = $$('[data-reveal]');
   if (!els.length) return;
+  if (!('IntersectionObserver' in window) || prefersReduced) {
+    els.forEach((el) => el.classList.add('revealed'));
+    return;
+  }
   const io = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) { entry.target.classList.add('revealed'); io.unobserve(entry.target); }
