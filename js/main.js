@@ -9,7 +9,7 @@ const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').mat
 const isCoarse = window.matchMedia('(hover: none)').matches;
 
 /* ---------- WhatsApp helpers ---------- */
-const WA_NUMBER = '919971955453';
+const WA_NUMBER = '919971955493';
 const WA_BASE = 'https://wa.me/' + WA_NUMBER;
 const WA_DEFAULT_MSG = 'Hi MobChecker, I need help with my mobile phone. I would like to know about the repair service.';
 function waUrl(msg) {
